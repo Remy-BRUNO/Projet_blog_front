@@ -2,12 +2,28 @@ import { cube, heart, search, add, eye } from "../../assets"
 import { NavLink, Form, useSubmit } from "react-router-dom"
 import { useRef } from "react"
 
+// styles
+import styled from "styled-components"
+
+const Nav = styled.nav`
+  display: flex;
+  height: 78px;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0 0 12px 12px;
+  background: #171918;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  bottom: 0;
+`
+
 const NavbarMobile = ({ user, searchTerm }) => {
   const submit = useSubmit()
   const inputRef = useRef(null)
   const role = user?.role
   return (
-    <nav>
+    <Nav>
       {role === "user" && (
         <>
           <NavLink to={"/user/favoris"}>
@@ -43,7 +59,9 @@ const NavbarMobile = ({ user, searchTerm }) => {
 
       <div>|</div>
       <Form>
-        <img src={search} alt="Search" />
+        <button>
+          <img src={search} alt="Search" />
+        </button>
         <input
           type="search"
           name="search"
@@ -56,7 +74,7 @@ const NavbarMobile = ({ user, searchTerm }) => {
           }}
         />
       </Form>
-    </nav>
+    </Nav>
   )
 }
 export default NavbarMobile

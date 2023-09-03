@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 // pages
 import {
@@ -36,94 +37,107 @@ import { action as deleteAction } from "./pages/admin/DeleteArticle"
 import { action as addFavorisAction } from "./pages/users/AddFavoris"
 import { action as deleteFavorisAction } from "./pages/users/DeleteFavoris"
 
-//routes
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <DashboardLayout />,
-        loader: dasboardLoader,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-        action: loginAction,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-        action: registerAction,
-      },
-    ],
-  },
-
-  {
-    path: "/admin",
-    element: <DashboardAdmin />,
-    loader: dashboardAdminLoader,
-    errorElement: <ErrorPage />,
-
-    children: [
-      {
-        index: true,
-        element: <ArticlesLayout />,
-      },
-      {
-        path: "/admin/addarticle",
-        element: <CreateArticle />,
-        action: addArticleAction,
-      },
-      {
-        path: "/admin/edit/:id",
-        element: <EditArticle />,
-        action: editAction,
-        loader: editLoader,
-      },
-      {
-        path: "/admin/delete/:id",
-        action: deleteAction,
-      },
-      {
-        path: "/admin/userslist",
-        element: <UsersList />,
-        loader: userListLoader,
-      },
-    ],
-  },
-
-  {
-    path: "/user",
-    element: <DashboardUsers />,
-    loader: dashboardUserLoader,
-    errorElement: <ErrorPage />,
-
-    children: [
-      {
-        index: true,
-        element: <ArticlesLayout />,
-      },
-      {
-        path: "/user/favoris",
-        element: <Favoris />,
-        loader: favorisLoader,
-      },
-      {
-        path: "/user/addfavoris/:id",
-        action: addFavorisAction,
-      },
-      {
-        path: "/user/deletefavoris/:id",
-        action: deleteFavorisAction,
-      },
-    ],
-  },
-])
-
+import { ThemeProvider } from "styled-components"
+import { lightTheme, darkTheme, GlobalStyles } from "./Styles/Theme"
 const App = () => {
-  return <RouterProvider router={router} />
+  const localTheme = JSON.parse(localStorage.getItem("dark")) ? "dark" : "light"
+  const [theme, setTheme] = useState(localTheme)
+  const themeToggle = (isDarkMode) => {
+    isDarkMode ? setTheme("dark") : setTheme("light")
+  }
+
+  //routes
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home themeToggle={themeToggle} theme={theme} />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <DashboardLayout />,
+          loader: dasboardLoader,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+          action: loginAction,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+          action: registerAction,
+        },
+      ],
+    },
+
+    {
+      path: "/admin",
+      element: <DashboardAdmin theme={theme} />,
+      loader: dashboardAdminLoader,
+      errorElement: <ErrorPage />,
+
+      children: [
+        {
+          index: true,
+          element: <ArticlesLayout />,
+        },
+        {
+          path: "/admin/addarticle",
+          element: <CreateArticle />,
+          action: addArticleAction,
+        },
+        {
+          path: "/admin/edit/:id",
+          element: <EditArticle />,
+          action: editAction,
+          loader: editLoader,
+        },
+        {
+          path: "/admin/delete/:id",
+          action: deleteAction,
+        },
+        {
+          path: "/admin/userslist",
+          element: <UsersList />,
+          loader: userListLoader,
+        },
+      ],
+    },
+
+    {
+      path: "/user",
+      element: <DashboardUsers theme={theme} />,
+      loader: dashboardUserLoader,
+      errorElement: <ErrorPage />,
+
+      children: [
+        {
+          index: true,
+          element: <ArticlesLayout />,
+        },
+        {
+          path: "/user/favoris",
+          element: <Favoris />,
+          loader: favorisLoader,
+        },
+        {
+          path: "/user/addfavoris/:id",
+          action: addFavorisAction,
+        },
+        {
+          path: "/user/deletefavoris/:id",
+          action: deleteFavorisAction,
+        },
+      ],
+    },
+  ])
+
+  return (
+    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  )
 }
 export default App

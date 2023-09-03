@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom"
 import NavbarMobile from "../components/footers/NavbarMobile"
 import HeaderComponent from "../components/headers/Header"
-
-const Home = () => {
+import { ThemeProvider } from "styled-components"
+import { lightTheme, darkTheme, GlobalStyles } from "../Styles/Theme"
+const Home = ({ themeToggle, theme }) => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent themeToggle={themeToggle} />
       <Outlet />
-      <NavbarMobile />
     </div>
   )
 }
