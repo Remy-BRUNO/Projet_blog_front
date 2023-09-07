@@ -1,24 +1,28 @@
 import { NavLink, Link, useNavigate } from "react-router-dom"
-import { logo } from "../../assets"
+import { logo, logoutIcon } from "../../assets"
 import { toast } from "react-toastify"
 import DarkModeToggle from "react-dark-mode-toggle"
 import { useEffect, useState } from "react"
 
 // styles
-import { lightTheme, darkTheme } from "../../Styles/Theme"
+import { HeaderTheme, LinkTheme } from "../../Styles/Theme"
 import styled from "styled-components"
+import { Icon, Button, devices } from "../../Styles/Styles"
 
-const Header = styled.header`
+const StyledHeader = styled(HeaderTheme)`
   display: flex;
   height: 78px;
+  width: 100%;
   margin: 0 auto;
   justify-content: space-around;
   align-items: center;
   border-radius: 0 0 12px 12px;
-  background: #171918;
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
   position: sticky;
   top: 0;
+  @media ${devices.laptop} {
+    display: none;
+  }
 `
 const Img = styled.img`
   width: 4rem;
@@ -30,7 +34,7 @@ const Links = styled.div`
   gap: 14px;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(LinkTheme)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,19 +43,26 @@ const StyledLink = styled(Link)`
 
   border-radius: 20px;
   border: 2px solid var(--main-green, #27ae60);
-  background: #3a3b3b;
+
   box-shadow: 0px 5px 15px 0px rgba(37, 44, 97, 0.15),
     0px 2px 4px 0px rgba(136, 144, 194, 0.2);
   color: var(--main-green, #27ae60);
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
   font-family: "Montserrat";
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   text-decoration: none;
 `
-const Button = styled.button`
+const UserName = styled.span`
+  text-transform: capitalize;
+  font-size: 1.5rem;
+`
+const UserInfo = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 `
 
 const HeaderComponent = ({ user, themeToggle }) => {
@@ -75,7 +86,7 @@ const HeaderComponent = ({ user, themeToggle }) => {
   }
 
   return (
-    <Header>
+    <StyledHeader className="headerBar">
       <NavLink to="/">
         <Img src={logo} alt="" />
       </NavLink>
@@ -83,12 +94,12 @@ const HeaderComponent = ({ user, themeToggle }) => {
       <DarkModeToggle onChange={handleChange} checked={isDarkMode} size={80} />
 
       {user && (
-        <div className="nav-user-info">
-          <span className="username">{user.name}</span>
-          <button type="button" className="btn" onClick={logout}>
-            déconnexion
-          </button>
-        </div>
+        <UserInfo className="nav-user-info">
+          <UserName className="username">{user.name} </UserName>
+          <Button type="button" className="btn" onClick={logout}>
+            <Icon src={logoutIcon} alt="logout" />
+          </Button>
+        </UserInfo>
       )}
       {!user && (
         <Links>
@@ -96,7 +107,7 @@ const HeaderComponent = ({ user, themeToggle }) => {
           <StyledLink to="/login">Login</StyledLink>
         </Links>
       )}
-    </Header>
+    </StyledHeader>
   )
 }
 export default HeaderComponent

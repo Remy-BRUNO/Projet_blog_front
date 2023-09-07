@@ -1,8 +1,11 @@
 import { Outlet, redirect, useLoaderData } from "react-router-dom"
 import HeaderComponent from "../../components/headers/Header"
 import axios from "axios"
-
 import NavbarMobile from "../../components/footers/NavbarMobile"
+
+//styles
+import { Main } from "../../Styles/Styles"
+import Sidebar from "../../components/headers/Sidebar"
 
 export const loader = async ({ request }) => {
   const token = localStorage.getItem("token")
@@ -32,16 +35,18 @@ export const loader = async ({ request }) => {
     return redirect("/")
   }
 }
-const DashboardAdmin = () => {
+const DashboardAdmin = ({ themeToggle }) => {
   const { user, data, searchTerm } = useLoaderData()
 
   return (
-    <div>
-      <HeaderComponent user={user} />
+    <Main>
+      <Sidebar themeToggle={themeToggle} searchTerm={searchTerm} user={user} />
+
+      <HeaderComponent user={user} themeToggle={themeToggle} />
 
       <Outlet context={[user, data]} />
       <NavbarMobile user={user} searchTerm={searchTerm} />
-    </div>
+    </Main>
   )
 }
 export default DashboardAdmin

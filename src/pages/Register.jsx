@@ -2,6 +2,12 @@ import { Form, Link, redirect } from "react-router-dom"
 import FormRow from "../components/FormRow.jsx"
 import axios from "axios"
 import { toast } from "react-toastify"
+import {
+  AtroposStyled,
+  Card,
+  LogButton,
+  StyledLink,
+} from "../Styles/Styles.jsx"
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const action = async ({ request }) => {
@@ -12,7 +18,7 @@ export const action = async ({ request }) => {
     const resp = await axios.post("/api/v1/auth/register", data)
     localStorage.setItem("token", resp.data.token)
     toast.success("Inscription réussie")
-    return redirect("/dashboard")
+    return redirect("/user")
   } catch (error) {
     toast.error(error?.response?.data?.msg)
     return error
@@ -21,16 +27,38 @@ export const action = async ({ request }) => {
 
 const Register = () => {
   return (
-    <Form method="POST" className="form">
-      <h4>Inscription</h4>
-      <FormRow type="text" name="name" labelText="nom" />
-      <FormRow type="email" name="email" />
-      <FormRow type="password" name="password" labelText="mot de passe" />
-      <button className="btn btn-block">S&apos;inscrire</button>
-      <p style={{ textAlign: "center", marginTop: "1em" }}>
-        Vous êtes déjà membre ? <Link to="/login">Se connecter</Link>
-      </p>
-    </Form>
+    <Card>
+      <Form method="POST" className="form">
+        <AtroposStyled
+          className="my-atropos"
+          activeOffset={20}
+          shadowScale={1.05}
+          highlight={false}
+          // onRotate={(x, y) => console.log("Rotate", x, y)}
+        >
+          <h2 data-atropos-offset="-3">Registration</h2>
+          <FormRow type="text" name="name" labelText="Name" />
+          <FormRow
+            type="email"
+            name="email"
+            labelText="Email"
+            data-atropos-offset="5"
+          />
+          <FormRow
+            type="password"
+            name="password"
+            labelText="PassWord"
+            data-atropos-offset="-1"
+          />
+          <LogButton className="btn btn-block" data-atropos-offset="3">
+            Register
+          </LogButton>
+          <p data-atropos-offset="1">
+            Have an Account? <StyledLink to="/login">Login Here</StyledLink>
+          </p>
+        </AtroposStyled>
+      </Form>
+    </Card>
   )
 }
 export default Register

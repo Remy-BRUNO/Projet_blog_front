@@ -7,5 +7,25 @@ import logo from "./logo.svg"
 import setting from "./icones/setting.svg"
 import add from "./icones/add.svg"
 import eye from "./icones/eye.svg"
+import edit from "./icones/edit.svg"
+import deleteIcon from "./icones/delete.svg"
+import logoutIcon from "./icones/logout.svg"
+import spaceInvader from "./spaceInvader.svg"
+import heartCompleted from "./icones/heartCompleted.svg"
 
-export { arrow, cube, heart, random, search, logo, setting, add, eye }
+export {
+  arrow,
+  cube,
+  heart,
+  heartCompleted,
+  random,
+  search,
+  logo,
+  setting,
+  add,
+  eye,
+  logoutIcon,
+  edit,
+  deleteIcon,
+  spaceInvader,
+}

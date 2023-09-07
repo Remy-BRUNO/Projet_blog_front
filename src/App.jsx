@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 // pages
 import {
@@ -18,9 +18,7 @@ import {
 // loaders
 import { loader as dashboardAdminLoader } from "./pages/admin/DashboardAdmin"
 import { loader as dashboardUserLoader } from "./pages/users/DashboardUsers"
-import DashboardLayout, {
-  loader as dasboardLoader,
-} from "./layouts/DashboardLayout"
+import { loader as homeLoader } from "./pages/Home"
 import ArticlesLayout from "./layouts/ArticlesLayout"
 import { loader as userListLoader } from "./pages/admin/UsersList"
 import { loader as favorisLoader } from "./pages/users/Favoris"
@@ -37,8 +35,10 @@ import { action as deleteAction } from "./pages/admin/DeleteArticle"
 import { action as addFavorisAction } from "./pages/users/AddFavoris"
 import { action as deleteFavorisAction } from "./pages/users/DeleteFavoris"
 
+//darkMode
 import { ThemeProvider } from "styled-components"
 import { lightTheme, darkTheme, GlobalStyles } from "./Styles/Theme"
+
 const App = () => {
   const localTheme = JSON.parse(localStorage.getItem("dark")) ? "dark" : "light"
   const [theme, setTheme] = useState(localTheme)
@@ -50,13 +50,13 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home themeToggle={themeToggle} theme={theme} />,
+      element: <Home themeToggle={themeToggle} />,
+      loader: homeLoader,
       errorElement: <ErrorPage />,
       children: [
         {
           index: true,
-          element: <DashboardLayout />,
-          loader: dasboardLoader,
+          element: <ArticlesLayout />,
         },
         {
           path: "/login",
@@ -73,7 +73,7 @@ const App = () => {
 
     {
       path: "/admin",
-      element: <DashboardAdmin theme={theme} />,
+      element: <DashboardAdmin themeToggle={themeToggle} />,
       loader: dashboardAdminLoader,
       errorElement: <ErrorPage />,
 
@@ -90,8 +90,8 @@ const App = () => {
         {
           path: "/admin/edit/:id",
           element: <EditArticle />,
-          action: editAction,
           loader: editLoader,
+          action: editAction,
         },
         {
           path: "/admin/delete/:id",
@@ -107,7 +107,7 @@ const App = () => {
 
     {
       path: "/user",
-      element: <DashboardUsers theme={theme} />,
+      element: <DashboardUsers themeToggle={themeToggle} />,
       loader: dashboardUserLoader,
       errorElement: <ErrorPage />,
 

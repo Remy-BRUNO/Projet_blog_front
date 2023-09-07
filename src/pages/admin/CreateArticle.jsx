@@ -1,8 +1,17 @@
-import { Link, Form, redirect, useNavigation } from "react-router-dom"
+import { Form, redirect, useNavigation } from "react-router-dom"
 import axios from "axios"
 import { toast } from "react-toastify"
 import FormRow from "../../components/FormRow"
 import { useState } from "react"
+
+//styles
+import {
+  FormStyled,
+  Input,
+  LogButton,
+  TextArea,
+  Card,
+} from "../../Styles/Styles"
 
 let imageValue
 
@@ -57,33 +66,37 @@ const CreateArticle = () => {
   }
 
   return (
-    <Form method="POST" className="form">
-      <FormRow type="text" name="title" labelText="Titre" />
-      <label htmlFor="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="5"
-        cols="33"
-        required
-      ></textarea>
-      <label htmlFor="image">Choisir une image</label>
-
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={handleChange}
-        required
-      />
-      <button
-        type="submit"
-        className="btn"
-        disabled={isSubmitting || uploading}
-      >
-        {isSubmitting ? "Ajout..." : "Ajouter"}
-      </button>
-    </Form>
+    <Card>
+      <FormStyled method="POST" className="form">
+        <FormRow type="text" name="title" labelText="Titre" />
+        {/* <label htmlFor="description">Description</label> */}
+        <TextArea
+          id="description"
+          name="description"
+          rows="5"
+          cols="33"
+          placeholder="Description"
+          required
+        ></TextArea>
+        {/* <Label htmlFor="upload-image">Choose a picture</Label> */}
+        <Input
+          type="file"
+          name="image"
+          id="upload-image"
+          accept="image/*"
+          onChange={handleChange}
+          placeholder="choose a picture"
+          required
+        />
+        <LogButton
+          type="submit"
+          className="btn"
+          disabled={isSubmitting || uploading}
+        >
+          {isSubmitting ? "Published..." : "Publish"}
+        </LogButton>
+      </FormStyled>
+    </Card>
   )
 }
 export default CreateArticle

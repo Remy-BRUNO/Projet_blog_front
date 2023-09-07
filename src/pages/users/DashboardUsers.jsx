@@ -3,6 +3,10 @@ import HeaderComponent from "../../components/headers/Header"
 import axios from "axios"
 import NavbarMobile from "../../components/footers/NavbarMobile"
 
+//styles
+import { Main } from "../../Styles/Styles"
+import Sidebar from "../../components/headers/Sidebar"
+
 export const loader = async ({ request }) => {
   const token = localStorage.getItem("token")
   const url = new URL(request.url)
@@ -21,26 +25,35 @@ export const loader = async ({ request }) => {
         Authorization: `Bearer ${token}`,
       },
     })
+    const { data: favoris } = await axios(`/api/v1/favoris`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
     return {
       user,
       data,
       searchTerm,
+      favoris,
     }
   } catch (error) {
     console.log(error?.response?.data?.msg)
     return redirect("/")
   }
 }
-const DashboardUsers = () => {
-  const { user, data, searchTerm } = useLoaderData()
+const DashboardUsers = ({ themeToggle }) => {
+  const { user, data, searchTerm, favoris } = useLoaderData()
 
   return (
-    <div>
-      <HeaderComponent user={user} />
+    <Main>
+      <Sidebar themeToggle={themeToggle} searchTerm={searchTerm} user={user} />
 
-      <Outlet context={[user, data]} />
+      <HeaderComponent user={user} themeToggle={themeToggle} />
+
+      <Outlet context={[user, data, favoris]} />
       <NavbarMobile user={user} searchTerm={searchTerm} />
-    </div>
+    </Main>
   )
 }
 export default DashboardUsers

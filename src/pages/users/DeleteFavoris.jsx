@@ -1,19 +1,16 @@
-import axios from "axios"
+import { customFetch } from "../../utils/customFetch"
 import { redirect } from "react-router-dom"
 import { toast } from "react-toastify"
 
 export const action = async ({ params }) => {
   const { id } = params
-  const token = localStorage.getItem("token")
 
   try {
-    await axios.delete(`/api/v1/favoris/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    await customFetch.delete(`favoris/${id}`)
     toast.success("Favoris supprimé")
   } catch (error) {
     toast.error(error?.response?.data?.msg)
   }
 
-  return redirect("/user")
+  return redirect("/user/favoris")
 }

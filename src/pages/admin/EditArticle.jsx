@@ -1,26 +1,25 @@
-import {
-  Link,
-  Form,
-  redirect,
-  useNavigation,
-  useLoaderData,
-} from "react-router-dom"
+import { Form, redirect, useNavigation, useLoaderData } from "react-router-dom"
 import axios from "axios"
 import { toast } from "react-toastify"
 import FormRow from "../../components/FormRow"
 import { useState } from "react"
+import { customFetch } from "../../utils/customFetch"
+
+//styles
+import {
+  FormStyled,
+  Input,
+  LogButton,
+  TextArea,
+  Card,
+} from "../../Styles/Styles"
 
 let imageValue
 export const loader = async ({ params }) => {
   const { id } = params
-  const token = localStorage.getItem("token")
 
   try {
-    const { data } = await axios(`/api/v1/article/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const { data } = await customFetch(`article/${id}`)
 
     imageValue = data.article.image
     return { data }
@@ -89,38 +88,43 @@ const EditArticle = () => {
   }
 
   return (
-    <Form method="POST" className="form">
-      <FormRow
-        type="text"
-        name="title"
-        labelText="Titre"
-        defaultValue={article.title}
-      />
-      <label htmlFor="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="5"
-        cols="33"
-        defaultValue={article.description}
-        required
-      ></textarea>
-      <label htmlFor="image">Choisir une image</label>
-
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={handleChange}
-      />
-      <button
-        type="submit"
-        className="btn"
-        disabled={isSubmitting || uploading}
-      >
-        {isSubmitting ? "Ajout..." : "Ajouter"}
-      </button>
-    </Form>
+    <Card>
+      <FormStyled method="POST" className="form">
+        <FormRow
+          type="text"
+          name="title"
+          labelText="Titre"
+          defaultValue={article.title}
+        />
+        <label htmlFor="description" hidden>
+          Description
+        </label>
+        <TextArea
+          id="description"
+          name="description"
+          rows="5"
+          cols="33"
+          defaultValue={article.description}
+          required
+        ></TextArea>
+        <label htmlFor="image" hidden>
+          Choisir une image
+        </label>
+        <Input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={handleChange}
+        />
+        <LogButton
+          type="submit"
+          className="btn"
+          disabled={isSubmitting || uploading}
+        >
+          {isSubmitting ? "Ajout..." : "Ajouter"}
+        </LogButton>
+      </FormStyled>
+    </Card>
   )
 }
 export default EditArticle
