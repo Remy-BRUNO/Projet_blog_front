@@ -1,4 +1,4 @@
-import { cube, heart, search, add, eye } from "../../Index"
+import { cube, heart, search, add, eye, heartCompleted } from "../../Index"
 import { NavLink, Form, useSubmit } from "react-router-dom"
 import { useRef, useState } from "react"
 
@@ -48,8 +48,12 @@ const NavbarMobile = ({ user, searchTerm }) => {
     <Nav className="footerBar">
       {role === "user" && (
         <>
-          <NavLink to={"/user/favoris"}>
-            <Icon src={heart} alt="" />
+          <NavLink
+            to={"/user/favoris"}
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            <Icon src={heart} alt="" className="heart" />
+            <Icon src={heartCompleted} alt="" className="heartCompleted" />
           </NavLink>
           <div>|</div>
           <NavLink to={"/user"}>

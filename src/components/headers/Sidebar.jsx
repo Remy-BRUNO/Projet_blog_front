@@ -1,5 +1,14 @@
-import { NavLink, Link, useNavigate, useSubmit, Form } from "react-router-dom"
-import { logo, logoutIcon, cube, heart, search, add, eye } from "../../Index"
+import { NavLink, useNavigate, useSubmit, Form } from "react-router-dom"
+import {
+  logo,
+  logoutIcon,
+  cube,
+  heart,
+  search,
+  add,
+  eye,
+  heartCompleted,
+} from "../../Index"
 import { toast } from "react-toastify"
 import DarkModeToggle from "react-dark-mode-toggle"
 import { useEffect, useState, useRef } from "react"
@@ -124,8 +133,12 @@ const Sidebar = ({ user, searchTerm, themeToggle }) => {
 
       {role === "user" && (
         <>
-          <StyledNavLink to={"/user/favoris"}>
-            <Icon src={heart} alt="" />
+          <StyledNavLink
+            to={"/user/favoris"}
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            <Icon src={heart} alt="" className="heart" />
+            <Icon src={heartCompleted} alt="" className="heartCompleted" />
             <p>Favoris</p>
           </StyledNavLink>
 

@@ -17,6 +17,7 @@ import {
 let imageValue
 export const loader = async ({ params }) => {
   const { id } = params
+  const token = localStorage.getItem("token")
 
   try {
     const { data } = await axios(

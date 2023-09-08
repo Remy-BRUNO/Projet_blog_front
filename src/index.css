@@ -5,3 +5,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.heartCompleted {
+  display: none;
+}
+.active .heart {
+  display: none;
+}
+.active .heartCompleted {
+  display: block;
+}

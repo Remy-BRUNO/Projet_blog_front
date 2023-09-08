@@ -11,6 +11,7 @@ import Sidebar from "../../components/headers/Sidebar"
 export const loader = async ({ request }) => {
   const url = new URL(request.url)
   const searchTerm = url.searchParams.get("search") || ""
+  const token = localStorage.getItem("token")
 
   try {
     const {

@@ -5,6 +5,7 @@ import { toast } from "react-toastify"
 
 export const action = async ({ params }) => {
   const { id } = params
+  const token = localStorage.getItem("token")
 
   try {
     await axios.delete(
