@@ -5,11 +5,14 @@ import ArticlesLayout from "../../layouts/ArticlesLayout"
 export const loader = async () => {
   const token = localStorage.getItem("token")
   try {
-    const { data } = await axios(`/api/v1/favoris`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const { data } = await axios(
+      `https://blog-api-wzi4.onrender.com/api/v1/favoris`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
 
     return { data }
   } catch (error) {

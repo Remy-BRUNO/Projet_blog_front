@@ -2,6 +2,7 @@ import { Outlet, redirect, useLoaderData } from "react-router-dom"
 import HeaderComponent from "../../components/headers/Header"
 import NavbarMobile from "../../components/footers/NavbarMobile"
 import { customFetch } from "../../utils/customFetch"
+import axios from "axios"
 
 //styles
 import { Main } from "../../Styles/Styles"
@@ -14,9 +15,24 @@ export const loader = async ({ request }) => {
   try {
     const {
       data: { user },
-    } = await customFetch("users/current-user")
-    const { data } = await customFetch(`article?search=${searchTerm}`)
-    const { data: favoris } = await customFetch(`favoris`)
+    } = await axios(
+      "https://blog-api-wzi4.onrender.com/api/v1/users/current-user",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    const { data } = await axios(
+      `https://blog-api-wzi4.onrender.com/api/v1/article?search=${searchTerm}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    const { data: favoris } = await axios(
+      `https://blog-api-wzi4.onrender.com/api/v1/favoris`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
 
     return {
       user,

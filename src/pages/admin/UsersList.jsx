@@ -51,7 +51,7 @@ export const loader = async () => {
 
   try {
     const { data } = await axios(
-      "https://blog-api-wzi4.onrender.com/api/v1/api/v1/users/current-user/admin",
+      "https://blog-api-wzi4.onrender.com/api/v1/users/current-user/admin",
       {
         headers: {
           Authorization: `Bearer ${token}`,
