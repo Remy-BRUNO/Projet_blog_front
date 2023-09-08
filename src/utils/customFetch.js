@@ -1,8 +1,19 @@
 import axios from "axios"
 
-const token = localStorage.getItem("token")
-
 export const customFetch = axios.create({
   baseURL: "/api/v1/",
-  headers: { Authorization: `Bearer ${token}` },
 })
+customFetch.interceptors.request.use(
+  (config) => {
+    if (config.authorization !== false) {
+      const token = localStorage.getItem("token")
+      if (token) {
+        config.headers.Authorization = "Bearer " + token
+      }
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)

@@ -5,18 +5,14 @@ import HeaderComponent from "../components/headers/Header"
 
 import { Main } from "../Styles/Styles"
 import Sidebar from "../components/headers/Sidebar"
+import { customFetch } from "../utils/customFetch"
 
 export const loader = async ({ request }) => {
-  const token = localStorage.getItem("token")
   const url = new URL(request.url)
   const searchTerm = url.searchParams.get("search") || ""
 
   try {
-    const { data } = await axios(`/api/v1/article?search=${searchTerm}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const { data } = await customFetch(`article?search=${searchTerm}`)
 
     return {
       data,

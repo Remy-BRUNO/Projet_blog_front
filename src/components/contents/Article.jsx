@@ -38,9 +38,6 @@ const ButtonContainer = styled.div`
   gap: 1rem;
   width: 90%;
 `
-const Img = styled.img`
-  width: 4rem;
-`
 
 const Article = ({ article, role, fav }) => {
   const { image, title, description, article_id, created_at } = article

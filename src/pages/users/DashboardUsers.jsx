@@ -1,35 +1,22 @@
 import { Outlet, redirect, useLoaderData } from "react-router-dom"
 import HeaderComponent from "../../components/headers/Header"
-import axios from "axios"
 import NavbarMobile from "../../components/footers/NavbarMobile"
+import { customFetch } from "../../utils/customFetch"
 
 //styles
 import { Main } from "../../Styles/Styles"
 import Sidebar from "../../components/headers/Sidebar"
 
 export const loader = async ({ request }) => {
-  const token = localStorage.getItem("token")
   const url = new URL(request.url)
   const searchTerm = url.searchParams.get("search") || ""
 
   try {
     const {
       data: { user },
-    } = await axios("/api/v1/users/current-user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const { data } = await axios(`/api/v1/article?search=${searchTerm}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const { data: favoris } = await axios(`/api/v1/favoris`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    } = await customFetch("users/current-user")
+    const { data } = await customFetch(`article?search=${searchTerm}`)
+    const { data: favoris } = await customFetch(`favoris`)
 
     return {
       user,

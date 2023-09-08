@@ -8,7 +8,7 @@ import {
   LogButton,
   StyledLink,
 } from "../Styles/Styles.jsx"
-import { spaceInvader } from "../assets/index.jsx"
+import { spaceInvader } from "../assets"
 
 export const action = async ({ request }) => {
   const formData = await request.formData()
