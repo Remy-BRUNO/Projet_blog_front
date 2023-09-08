@@ -15,16 +15,22 @@ export const loader = async ({ request }) => {
   try {
     const {
       data: { user },
-    } = await axios("/api/v1/users/current-user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const { data } = await axios(`/api/v1/article?search=${searchTerm}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    } = await axios(
+      "https://blog-api-wzi4.onrender.com/api/v1/users/current-user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    const { data } = await axios(
+      `https://blog-api-wzi4.onrender.com/api/v1/article?search=${searchTerm}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
     return {
       user,
       data,

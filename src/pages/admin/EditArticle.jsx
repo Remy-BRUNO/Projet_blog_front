@@ -19,7 +19,12 @@ export const loader = async ({ params }) => {
   const { id } = params
 
   try {
-    const { data } = await customFetch(`article/${id}`)
+    const { data } = await axios(
+      `https://blog-api-wzi4.onrender.com/api/v1/article/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
 
     imageValue = data.article.image
     return { data }
@@ -37,9 +42,13 @@ export const action = async ({ params, request }) => {
 
   data.image = imageValue
   try {
-    await axios.put(`/api/v1/article/admin/${id}`, data, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    await axios.put(
+      `https://blog-api-wzi4.onrender.com/api/v1/article/admin/${id}`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     toast.success("Article Modifié")
     return redirect("/admin")
   } catch (error) {

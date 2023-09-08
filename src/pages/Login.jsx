@@ -14,7 +14,10 @@ export const action = async ({ request }) => {
   const formData = await request.formData()
   const data = Object.fromEntries(formData)
   try {
-    const resp = await axios.post("/api/v1/auth/login", data)
+    const resp = await axios.post(
+      "https://blog-api-wzi4.onrender.com/api/v1/auth/login",
+      data
+    )
     localStorage.setItem("token", resp.data.token)
     toast.success("Connexion réussie")
     if (resp.data.role === "admin") {

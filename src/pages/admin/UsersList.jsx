@@ -50,11 +50,14 @@ export const loader = async () => {
   const token = localStorage.getItem("token")
 
   try {
-    const { data } = await axios("/api/v1/users/current-user/admin", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const { data } = await axios(
+      "https://blog-api-wzi4.onrender.com/api/v1/api/v1/users/current-user/admin",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
     return { data }
   } catch (error) {
     console.log(error?.response?.data?.msg)

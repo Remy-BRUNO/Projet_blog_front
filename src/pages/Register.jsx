@@ -15,7 +15,10 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData)
 
   try {
-    const resp = await axios.post("/api/v1/auth/register", data)
+    const resp = await axios.post(
+      "https://blog-api-wzi4.onrender.com/api/v1/api/v1/auth/register",
+      data
+    )
     localStorage.setItem("token", resp.data.token)
     toast.success("Inscription réussie")
     return redirect("/user")

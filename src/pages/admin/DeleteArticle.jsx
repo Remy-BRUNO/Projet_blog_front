@@ -7,9 +7,12 @@ export const action = async ({ params }) => {
   const token = localStorage.getItem("token")
 
   try {
-    await axios.delete(`/api/v1/article/admin/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    await axios.delete(
+      `https://blog-api-wzi4.onrender.com/api/v1/article/admin/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     toast.success("Article supprimé")
   } catch (error) {
     toast.error(error?.response?.data?.msg)
