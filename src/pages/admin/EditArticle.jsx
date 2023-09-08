@@ -81,12 +81,16 @@ const EditArticle = () => {
         data: {
           image: { src },
         },
-      } = await axios.post(`/api/v1/article/uploads`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      } = await axios.post(
+        `https://blog-api-wzi4.onrender.com/api/v1/article/uploads`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
 
       setTimeout(setUploading(false), 5000)
       imageValue = src
