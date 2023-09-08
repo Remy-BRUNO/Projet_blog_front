@@ -1,4 +1,4 @@
-import { cube, heart, search, add, eye } from "../../assets"
+import { cube, heart, search, add, eye } from "../../Index"
 import { NavLink, Form, useSubmit } from "react-router-dom"
 import { useRef, useState } from "react"
 

@@ -1,5 +1,5 @@
 import { NavLink, Link, useNavigate } from "react-router-dom"
-import { logo, logoutIcon } from "../../assets"
+import { logo, logoutIcon } from "../../Index"
 import { toast } from "react-toastify"
 import DarkModeToggle from "react-dark-mode-toggle"
 import { useEffect, useState } from "react"

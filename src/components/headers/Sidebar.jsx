@@ -1,5 +1,5 @@
 import { NavLink, Link, useNavigate, useSubmit, Form } from "react-router-dom"
-import { logo, logoutIcon, cube, heart, search, add, eye } from "../../assets"
+import { logo, logoutIcon, cube, heart, search, add, eye } from "../../Index"
 import { toast } from "react-toastify"
 import DarkModeToggle from "react-dark-mode-toggle"
 import { useEffect, useState, useRef } from "react"

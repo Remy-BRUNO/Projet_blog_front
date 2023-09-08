@@ -1,5 +1,5 @@
 import { NavLink, Link, useNavigate, Form } from "react-router-dom"
-import { edit, deleteIcon, heart, heartCompleted } from "../../assets"
+import { edit, deleteIcon, heart, heartCompleted } from "../../Index"
 
 //style
 import { styled } from "styled-components"
