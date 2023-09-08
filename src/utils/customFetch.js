@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const customFetch = axios.create({
-  baseURL: "/api/v1/",
+  baseURL: "https://blog-api-wzi4.onrender.com/api/v1/",
 })
 customFetch.interceptors.request.use(
   (config) => {

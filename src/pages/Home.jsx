@@ -12,7 +12,9 @@ export const loader = async ({ request }) => {
   const searchTerm = url.searchParams.get("search") || ""
 
   try {
-    const { data } = await customFetch(`article?search=${searchTerm}`)
+    const { data } = await axios(
+      `https://blog-api-wzi4.onrender.com/api/v1/article?search=${searchTerm}`
+    )
 
     return {
       data,
