@@ -10,7 +10,7 @@ import eye from "./icones/eye.svg"
 import edit from "./icones/edit.svg"
 import deleteIcon from "./icones/delete.svg"
 import logoutIcon from "./icones/logout.svg"
-import spaceInvader from "./spaceInvader.svg"
+
 import heartCompleted from "./icones/heartCompleted.svg"
 
 export {
@@ -27,5 +27,4 @@ export {
   logoutIcon,
   edit,
   deleteIcon,
-  spaceInvader,
 }
