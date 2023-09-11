@@ -1,7 +1,7 @@
 import { Outlet, redirect, useLoaderData } from "react-router-dom"
 import HeaderComponent from "../../components/headers/Header"
 import NavbarMobile from "../../components/footers/NavbarMobile"
-import { customFetch } from "../../utils/customFetch"
+
 import axios from "axios"
 
 //styles

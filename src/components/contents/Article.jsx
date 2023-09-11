@@ -1,10 +1,9 @@
-import { NavLink, Link, useNavigate, Form } from "react-router-dom"
+import { Link, Form } from "react-router-dom"
 import { edit, deleteIcon, heart, heartCompleted } from "../../Index"
 
 //style
 import { styled } from "styled-components"
 import { Icon, Button } from "../../Styles/Styles"
-import { useEffect, useState } from "react"
 
 const Aside = styled.aside`
   display: flex;
@@ -28,6 +27,8 @@ const Title = styled.h3`
 `
 const ImgArticle = styled.img`
   width: 90%;
+  max-width: 810px;
+  max-height: 1200px;
 `
 
 const Info = styled.p`

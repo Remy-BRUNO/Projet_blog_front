@@ -6,6 +6,7 @@ import NavbarMobile from "../../components/footers/NavbarMobile"
 //styles
 import { Main } from "../../Styles/Styles"
 import Sidebar from "../../components/headers/Sidebar"
+import { urlApi } from "../../App"
 
 export const loader = async ({ request }) => {
   const token = localStorage.getItem("token")
@@ -15,16 +16,13 @@ export const loader = async ({ request }) => {
   try {
     const {
       data: { user },
-    } = await axios(
-      "https://blog-api-wzi4.onrender.com/api/v1/users/current-user",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    } = await axios(`${urlApi}/api/v1/users/current-user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     const { data } = await axios(
-      `https://blog-api-wzi4.onrender.com/api/v1/article?search=${searchTerm}`,
+      `${urlApi}/api/v1/article?search=${searchTerm}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

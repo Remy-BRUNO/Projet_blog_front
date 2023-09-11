@@ -42,11 +42,11 @@ const StyledLink = styled(LinkTheme)`
   height: 28px;
 
   border-radius: 20px;
-  border: 2px solid var(--main-green, #27ae60);
+  border: 2px solid #27ae60;
 
   box-shadow: 0px 5px 15px 0px rgba(37, 44, 97, 0.15),
     0px 2px 4px 0px rgba(136, 144, 194, 0.2);
-  color: var(--main-green, #27ae60);
+  color: #27ae60;
   font-family: "Montserrat";
   font-size: 14px;
   font-style: normal;
@@ -88,7 +88,7 @@ const HeaderComponent = ({ user, themeToggle }) => {
   return (
     <StyledHeader className="headerBar">
       <NavLink to="/">
-        <Img src={logo} alt="" />
+        <Img src={logo} alt="logo lien vers l'accueil" />
       </NavLink>
 
       <DarkModeToggle onChange={handleChange} checked={isDarkMode} size={80} />

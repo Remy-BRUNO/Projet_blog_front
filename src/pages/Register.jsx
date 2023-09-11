@@ -8,6 +8,7 @@ import {
   LogButton,
   StyledLink,
 } from "../Styles/Styles.jsx"
+import { urlApi } from "../App.jsx"
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const action = async ({ request }) => {
@@ -15,10 +16,7 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData)
 
   try {
-    const resp = await axios.post(
-      "https://blog-api-wzi4.onrender.com/api/v1/api/v1/auth/register",
-      data
-    )
+    const resp = await axios.post(`${urlApi}/api/v1/api/v1/auth/register`, data)
     localStorage.setItem("token", resp.data.token)
     toast.success("Inscription réussie")
     return redirect("/user")

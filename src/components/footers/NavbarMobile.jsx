@@ -52,12 +52,16 @@ const NavbarMobile = ({ user, searchTerm }) => {
             to={"/user/favoris"}
             className={({ isActive }) => (isActive ? "active" : "")}
           >
-            <Icon src={heart} alt="" className="heart" />
-            <Icon src={heartCompleted} alt="" className="heartCompleted" />
+            <Icon src={heart} alt="favoris" className="heart" />
+            <Icon
+              src={heartCompleted}
+              alt="favoris"
+              className="heartCompleted"
+            />
           </NavLink>
           <div>|</div>
           <NavLink to={"/user"}>
-            <Icon src={cube} alt="" />
+            <Icon src={cube} alt="All articles" />
           </NavLink>
         </>
       )}
@@ -79,7 +83,7 @@ const NavbarMobile = ({ user, searchTerm }) => {
 
       {!user && (
         <NavLink to={"/"}>
-          <Icon src={cube} alt="" />
+          <Icon src={cube} alt="All articles" />
         </NavLink>
       )}
 

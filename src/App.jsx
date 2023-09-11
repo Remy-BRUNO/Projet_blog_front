@@ -39,13 +39,15 @@ import { action as deleteFavorisAction } from "./pages/users/DeleteFavoris"
 import { ThemeProvider } from "styled-components"
 import { lightTheme, darkTheme, GlobalStyles } from "./Styles/Theme"
 
+// export const urlApi = "https://blog-api-wzi4.onrender.com"
+export const urlApi = "http://localhost:5000"
+
 const App = () => {
   const localTheme = JSON.parse(localStorage.getItem("dark")) ? "dark" : "light"
   const [theme, setTheme] = useState(localTheme)
   const themeToggle = (isDarkMode) => {
     isDarkMode ? setTheme("dark") : setTheme("light")
   }
-
   //routes
   const router = createBrowserRouter([
     {

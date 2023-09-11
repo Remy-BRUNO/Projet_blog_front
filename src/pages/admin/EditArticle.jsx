@@ -4,6 +4,7 @@ import { toast } from "react-toastify"
 import FormRow from "../../components/FormRow"
 import { useState } from "react"
 import { customFetch } from "../../utils/customFetch"
+import { urlApi } from "../../App"
 
 //styles
 import {
@@ -20,12 +21,9 @@ export const loader = async ({ params }) => {
   const token = localStorage.getItem("token")
 
   try {
-    const { data } = await axios(
-      `https://blog-api-wzi4.onrender.com/api/v1/article/${id}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    const { data } = await axios(`${urlApi}/api/v1/article/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
 
     imageValue = data.article.image
     return { data }

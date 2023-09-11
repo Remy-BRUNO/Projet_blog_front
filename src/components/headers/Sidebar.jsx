@@ -127,7 +127,7 @@ const Sidebar = ({ user, searchTerm, themeToggle }) => {
   return (
     <SidebarStylded>
       <StyledNavLink to="/">
-        <Img src={logo} alt="" />
+        <Img src={logo} alt="logo link to homePage" />
         <h1>ByGeek</h1>
       </StyledNavLink>
 
@@ -137,13 +137,17 @@ const Sidebar = ({ user, searchTerm, themeToggle }) => {
             to={"/user/favoris"}
             className={({ isActive }) => (isActive ? "active" : "")}
           >
-            <Icon src={heart} alt="" className="heart" />
-            <Icon src={heartCompleted} alt="" className="heartCompleted" />
+            <Icon src={heart} alt="favoris" className="heart" />
+            <Icon
+              src={heartCompleted}
+              alt="favoris"
+              className="heartCompleted"
+            />
             <p>Favoris</p>
           </StyledNavLink>
 
           <StyledNavLink to={"/user"}>
-            <Icon src={cube} alt="" />
+            <Icon src={cube} alt="All articles" />
             <p>All Articles</p>
           </StyledNavLink>
         </>
@@ -169,7 +173,7 @@ const Sidebar = ({ user, searchTerm, themeToggle }) => {
 
       {!user && (
         <StyledNavLink to={"/"}>
-          <Icon src={cube} alt="" />
+          <Icon src={cube} alt="All articles" />
           <p>All Articles</p>
         </StyledNavLink>
       )}

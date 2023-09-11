@@ -1,6 +1,7 @@
 import axios from "axios"
 import { redirect, useLoaderData } from "react-router-dom"
 import { styled } from "styled-components"
+import { urlApi } from "../../App"
 
 //styles
 const Ol = styled.ol`
@@ -50,14 +51,11 @@ export const loader = async () => {
   const token = localStorage.getItem("token")
 
   try {
-    const { data } = await axios(
-      "https://blog-api-wzi4.onrender.com/api/v1/users/current-user/admin",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    const { data } = await axios(`${urlApi}/api/v1/users/current-user/admin`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return { data }
   } catch (error) {
     console.log(error?.response?.data?.msg)

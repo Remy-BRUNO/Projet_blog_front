@@ -12,6 +12,7 @@ import {
   TextArea,
   Card,
 } from "../../Styles/Styles"
+import { urlApi } from "../../App"
 
 let imageValue
 
@@ -22,13 +23,9 @@ export const action = async ({ request }) => {
   data.image = imageValue
 
   try {
-    await axios.post(
-      "https://blog-api-wzi4.onrender.com/api/v1/article/admin",
-      data,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    await axios.post(`${urlApi}/api/v1/article/admin`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
     toast.success("Article ajouté")
     return redirect("/admin")
   } catch (error) {
@@ -54,16 +51,12 @@ const CreateArticle = () => {
         data: {
           image: { src },
         },
-      } = await axios.post(
-        `https://blog-api-wzi4.onrender.com/api/v1/article/uploads`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      } = await axios.post(`${urlApi}/api/v1/article/uploads`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setTimeout(setUploading(false), 5000)
 
       imageValue = src

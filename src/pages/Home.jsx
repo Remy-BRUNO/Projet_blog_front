@@ -5,7 +5,7 @@ import HeaderComponent from "../components/headers/Header"
 
 import { Main } from "../Styles/Styles"
 import Sidebar from "../components/headers/Sidebar"
-import { customFetch } from "../utils/customFetch"
+import { urlApi } from "../App"
 
 export const loader = async ({ request }) => {
   const url = new URL(request.url)
@@ -13,7 +13,7 @@ export const loader = async ({ request }) => {
 
   try {
     const { data } = await axios(
-      `https://blog-api-wzi4.onrender.com/api/v1/article?search=${searchTerm}`
+      `${urlApi}/api/v1/article?search=${searchTerm}`
     )
 
     return {

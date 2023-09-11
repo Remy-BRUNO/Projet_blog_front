@@ -25,7 +25,7 @@ export const lightTheme = {
   body: `no-repeat url(${lightOn})`,
   text: "#121620",
   background: "#F5F5F5",
-  button: "#F5F5F5",
+  button: "#6d6d6d",
 }
 export const darkTheme = {
   body: `no-repeat url(${lightOff})`,
