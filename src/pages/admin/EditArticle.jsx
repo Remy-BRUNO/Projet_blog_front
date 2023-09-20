@@ -1,9 +1,8 @@
-import { Form, redirect, useNavigation, useLoaderData } from "react-router-dom"
+import { redirect, useNavigation, useLoaderData } from "react-router-dom"
 import axios from "axios"
 import { toast } from "react-toastify"
 import FormRow from "../../components/FormRow"
 import { useState } from "react"
-import { customFetch } from "../../utils/customFetch"
 import { urlApi } from "../../App"
 
 //styles
@@ -41,13 +40,9 @@ export const action = async ({ params, request }) => {
 
   data.image = imageValue
   try {
-    await axios.put(
-      `https://blog-api-wzi4.onrender.com/api/v1/article/admin/${id}`,
-      data,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    await axios.put(`${urlApi}/api/v1/article/admin/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
     toast.success("Article Modifié")
     return redirect("/admin")
   } catch (error) {
@@ -80,16 +75,12 @@ const EditArticle = () => {
         data: {
           image: { src },
         },
-      } = await axios.post(
-        `https://blog-api-wzi4.onrender.com/api/v1/article/uploads`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      } = await axios.post(`${urlApi}/api/v1/article/uploads`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
       setTimeout(setUploading(false), 5000)
       imageValue = src
