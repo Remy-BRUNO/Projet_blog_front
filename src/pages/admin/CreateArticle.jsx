@@ -1,4 +1,4 @@
-import { Form, redirect, useNavigation } from "react-router-dom"
+import { redirect, useNavigation } from "react-router-dom"
 import axios from "axios"
 import { toast } from "react-toastify"
 import FormRow from "../../components/FormRow"
@@ -70,8 +70,11 @@ const CreateArticle = () => {
     <Card>
       <FormStyled method="POST" className="form">
         <FormRow type="text" name="title" labelText="Titre" />
-        {/* <label htmlFor="description">Description</label> */}
+        <label hidden={true} htmlFor="description">
+          Description
+        </label>
         <TextArea
+          aria-label="description"
           id="description"
           name="description"
           rows="5"
@@ -79,7 +82,9 @@ const CreateArticle = () => {
           placeholder="Description"
           required
         ></TextArea>
-        {/* <Label htmlFor="upload-image">Choose a picture</Label> */}
+        <label hidden={true} htmlFor="upload-image">
+          Choose a picture
+        </label>
         <Input
           type="file"
           name="image"

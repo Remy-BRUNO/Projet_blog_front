@@ -1,6 +1,5 @@
 import { redirect } from "react-router-dom"
 import { toast } from "react-toastify"
-import { customFetch } from "../../utils/customFetch"
 import axios from "axios"
 import { urlApi } from "../../App"
 export const action = async ({ params }) => {

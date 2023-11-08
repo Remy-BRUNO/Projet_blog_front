@@ -1,4 +1,3 @@
-import Atropos from "atropos/react"
 import { Link, Form } from "react-router-dom"
 import { styled } from "styled-components"
 
@@ -39,13 +38,13 @@ export const Icon = styled.img`
   width: 24px;
 `
 
-export const AtroposStyled = styled(Atropos)`
+export const CardStyled = styled.div`
   width: 400px;
   height: 500px;
   margin: 0 auto;
   color: white;
   text-align: center;
-  & .atropos-inner {
+  & .card-inner {
     border-radius: 1rem;
     width: 100%;
     height: 100%;
@@ -54,6 +53,7 @@ export const AtroposStyled = styled(Atropos)`
     flex-direction: column;
     gap: 2rem;
     background-color: #514f4f;
+
     padding: 2rem;
   }
   & img {

@@ -3,6 +3,7 @@ import HeaderComponent from "../../components/headers/Header"
 import NavbarMobile from "../../components/footers/NavbarMobile"
 
 import axios from "axios"
+import { urlApi } from "../../App"
 
 //styles
 import { Main } from "../../Styles/Styles"
@@ -16,24 +17,18 @@ export const loader = async ({ request }) => {
   try {
     const {
       data: { user },
-    } = await axios(
-      "https://blog-api-wzi4.onrender.com/api/v1/users/current-user",
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    } = await axios(`${urlApi}/api/v1/users/current-user`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
     const { data } = await axios(
-      `https://blog-api-wzi4.onrender.com/api/v1/article?search=${searchTerm}`,
+      `${urlApi}/api/v1/article?search=${searchTerm}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     )
-    const { data: favoris } = await axios(
-      `https://blog-api-wzi4.onrender.com/api/v1/favoris`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    const { data: favoris } = await axios(`${urlApi}/api/v1/favoris`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
 
     return {
       user,
